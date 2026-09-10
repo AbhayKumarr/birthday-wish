@@ -211,9 +211,21 @@ h1{
 }
 @keyframes sheen{0%,60%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
 
+/* A card with no panel at all — the cake and button sit straight on the
+   backdrop. backdrop-filter has to go too: it was frosting the photo behind
+   the card, which reads as "blocked" even once the fill is transparent. */
+.card.clear{
+  background:transparent;
+  border-color:transparent;
+  box-shadow:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+.card.clear::after{display:none}
+
 /* ---------- cake ---------- */
 .cake-stage{display:flex;flex-direction:column;align-items:center;gap:18px}
-.cake{width:min(260px,72vw);aspect-ratio:1/1;overflow:visible}
+.cake{width:min(260px,72vw);aspect-ratio:1/1;overflow:visible;filter:drop-shadow(0 14px 26px rgba(18,4,36,.55))}
 .flame{transform-origin:center bottom;animation:flicker .45s ease-in-out infinite alternate}
 .flame.out{opacity:0;transform:scale(.2);transition:all .45s ease}
 .glow{animation:glowFade 1.6s ease-in-out infinite}
@@ -246,6 +258,7 @@ h1{
 
 .wish-note{
   max-width:34ch;margin:6px auto 0;font-size:.95rem;color:var(--pink-soft);
+  text-shadow:0 1px 9px rgba(18,4,36,.92);
   opacity:0;transform:translateY(10px);
   transition:opacity .7s ease .2s,transform .7s ease .2s;
 }
@@ -330,7 +343,7 @@ footer{
   </header>
 
   <!-- ================= CAKE ================= -->
-  <section class="card reveal">
+  <section class="card clear reveal">
     <div class="cake-stage">
       <svg class="cake" viewBox="0 0 200 200" role="img" aria-label="A purple birthday cake with three candles">
         <defs>
