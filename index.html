@@ -411,25 +411,20 @@ footer{
   <!-- ================= MESSAGE ================= -->
   <section class="card reveal">
     <p class="msg">
-      Another year around the sun — and you spent it the way you do everything:
-      <span class="em">quietly</span>, carefully, and far better than anyone noticed. 🌷
+      Happy Birthday, <strong id="nameEcho">Meenamma</strong>! 🌷💜
     </p>
     <div class="divider"></div>
     <p class="msg">
-      Here's to a <strong>peaceful, calm year</strong> — slow mornings, nothing heavy on your
-      mind, no rush anywhere, and plenty of ordinary days that turn out to be
-      <span class="em">really fun</span>. 💜
+      Wishing you a <span class="em">peaceful, happy year</span> ahead — with less stress,
+      more good days, and plenty of aloo paratha, rajma chawal, and desserts. 😌✨
     </p>
     <div class="divider"></div>
     <p class="msg">
-      And here's to the truly important things: hot <span class="em">aloo paratha</span> with
-      extra butter 🥘, a full plate of <span class="em">rajma chawal</span> 🍛, and dessert
-      that nobody asks you to share. 🍰
+      Stay the <span class="em">sweet, simple person</span> you are. 🌸
     </p>
     <div class="divider"></div>
     <p class="msg">
-      Stay exactly as you are — <span class="em">thoughtful</span>, gentle, unhurried,
-      and endlessly kind. ✨
+      And I hope this <em class="em">officially unofficial</em> birthday counts. 😌🎂
     </p>
   </section>
 
@@ -462,7 +457,12 @@ footer{
   var qName = new URLSearchParams(location.search).get("name");
   if (qName) {
     var clean = qName.replace(/[<>]/g, "").trim().slice(0, 28);
-    if (clean) { nameEl.textContent = clean; }
+    if (clean) {
+      nameEl.textContent = clean;
+      /* the message repeats the name, so keep the two in step */
+      var echo = document.getElementById("nameEcho");
+      if (echo) { echo.textContent = clean; }
+    }
   }
   document.title = "Happy Birthday, " + nameEl.textContent + " 💜";
 
