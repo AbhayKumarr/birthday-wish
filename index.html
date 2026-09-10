@@ -66,6 +66,37 @@ body::after{
     linear-gradient(170deg, rgba(21,8,38,.74), rgba(30,11,58,.58) 45%, rgba(45,16,85,.76));
 }
 
+/* Portrait phones crop this landscape still hard (cover scales it to fill the
+   height, so only a narrow centre strip shows, upscaled ~4x). Compensate:
+   aim the crop at the two faces, cut the blur back so the upscale doesn't turn
+   to mush, and shrink the bleed inset that was adding yet more magnification. */
+@media (max-width:640px){
+  /* A 1.96:1 still inside a 0.46:1 viewport can only crop hard or letterbox.
+     Cropping hid the whole scene, so on phones the photo becomes a wide band
+     across the top instead — barely upscaled, so it stays sharp — and the
+     purple gradient takes over below it. Longhands only: restating the
+     `background` shorthand would mean repeating the whole data URI. */
+  body::before{
+    inset:0;
+    transform:none;
+    background-size:150% auto;
+    background-position:55% 0;
+    background-repeat:no-repeat;
+    filter:blur(2px) saturate(1.2) brightness(.97);
+  }
+  body::after{
+    /* The band is 287px tall (150% of 375 / 1.96), so the wash must be
+       effectively opaque by ~285px or its bottom edge shows as a seam. */
+    background:linear-gradient(180deg,
+      rgba(21,8,38,.40) 0px,
+      rgba(21,8,38,.44) 130px,
+      rgba(24,9,45,.62) 200px,
+      rgba(30,11,58,.88) 255px,
+      rgba(37,14,72,.97) 285px,
+      rgba(45,16,85,.98) 100%);
+  }
+}
+
 /* ---------- soft drifting light blobs ---------- */
 .blob{
   position:fixed;border-radius:50%;filter:blur(70px);
